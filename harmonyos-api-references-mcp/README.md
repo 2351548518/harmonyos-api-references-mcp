@@ -2,12 +2,15 @@
 
 把鸿蒙 API 参考文档(4495 篇,`@ohos.*` 模块精确接口定义)封装成 MCP 检索服务,供 Claude Code / opencode / Cursor / Cline 等客户端在开发时查接口签名、参数、枚举、错误码。**文档随包发布,装包即用、零配置。**
 
-与姊妹项目分工:
-- **本服务(api-references)**:查 API **精确接口定义**(参数、返回值、枚举取值、错误码)
-- [`harmonyos-guides-mcp`](https://github.com/2351548518/harmonyos-guides-mcp):查 API **用法、调用流程、示例**(开发指南)
-- [`harmonyos-best-practices-mcp`](https://github.com/2351548518/harmonyos-best-practices-mcp):查**场景最佳实践 + 参考代码**
+与姊妹项目分工互补:
 
-三者可并列使用:guides 讲用法、本服务查精确签名、best-practices 给场景实践。
+| | 本项目(api-references) | guides | best-practices | ui-design-guides |
+|---|---|---|---|---|
+| 查什么 | **接口精确定义**(参数/枚举/错误码) | **API 用法、调用流程** | **场景最佳实践 + 参考代码** | **设计怎么做**(视觉/交互/控件设计规范) |
+| 数据 | 4495 篇 API 参考 | 5489 篇指南 | 452 篇 + 186 代码仓库 | 166 篇设计指南 |
+| 适用 | "AudioCapturer 方法签名" | "AVPlayer 怎么初始化" | "长列表丢帧优化" | "底部页签设计规范" |
+
+四者并列:api-references 查精确签名、guides 讲 API 用法、best-practices 给场景实践与参考代码、ui-design-guides 定设计规范。
 
 ## 提供的工具
 
@@ -19,7 +22,34 @@
 
 数据规模:4495 篇 API 参考,9 个顶级类——应用框架(1700)、系统(1042)、媒体(650)、应用服务(552)、图形(346)、AI(113)、公共基础能力(48)、标准库(41)、API参考概述(3)。
 
-## 安装(最终用户)
+## 四者并列使用(opencode 示例)
+
+```json
+{
+  "mcp": {
+    "harmonyos-best-practices": {
+      "type": "local",
+      "command": ["npx", "-y", "harmonyos-best-practices-mcp"]
+    },
+    "harmonyos-guides": {
+      "type": "local",
+      "command": ["npx", "-y", "harmonyos-guides-mcp"]
+    },
+    "harmonyos-api-references": {
+      "type": "local",
+      "command": ["npx", "-y", "harmonyos-api-references-mcp"]
+    },
+    "harmonyos-ui-design-guides": {
+      "type": "local",
+      "command": ["npx", "-y", "harmonyos-ui-design-guides-mcp"]
+    }
+  }
+}
+```
+
+搭配各自的 Skill(`harmonyos-best-practices` / `harmonyos-guides` / `harmonyos-api-references` / `harmonyos-ui-design-guides`),AI 可据需求选用:guides 查 API 用法、best-practices 查场景实践与参考代码、api-references 查精确签名、ui-design-guides 查设计规范。
+
+## 安装
 
 无需 clone 本仓库,直接配置客户端(以 Claude Code / opencode `.mcp.json` 为例):
 

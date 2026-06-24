@@ -12,15 +12,42 @@
 
 与姊妹项目分工互补:
 
-| | 本项目(api-references) | guides | best-practices |
-|---|---|---|---|
-| 查什么 | **接口精确定义**(参数、返回值、枚举、错误码) | **API 用法、调用流程、示例** | **场景最佳实践 + 参考代码** |
-| 数据 | 4495 篇 API 参考 | 5489 篇指南 | 452 篇 + 186 代码仓库 |
-| 适用 | "AudioCapturer 有哪些方法""state 枚举取值""错误码含义" | "AVPlayer 怎么初始化""Audio Kit 录音流程" | "长列表丢帧怎么优化""组件复用范例" |
+| | 本项目(api-references) | guides | best-practices | ui-design-guides |
+|---|---|---|---|---|
+| 查什么 | **接口精确定义**(参数/枚举/错误码) | **API 用法、调用流程** | **场景最佳实践 + 参考代码** | **设计怎么做**(视觉/交互/控件设计规范) |
+| 数据 | 4495 篇 API 参考 | 5489 篇指南 | 452 篇 + 186 代码仓库 | 166 篇设计指南 |
+| 适用 | "AudioCapturer 方法签名""state 枚举取值" | "AVPlayer 怎么初始化" | "长列表丢帧优化""组件复用范例" | "底部页签设计规范""暗色模式色彩" |
 
-三者并列使用:guides 讲用法、本服务查精确签名、best-practices 给场景实践。
+四者并列:api-references 查精确签名、guides 讲 API 用法、best-practices 给场景实践与参考代码、ui-design-guides 定设计规范。
 
-## 快速开始(最终用户)
+## 四者并列使用(opencode 示例)
+
+```json
+{
+  "mcp": {
+    "harmonyos-best-practices": {
+      "type": "local",
+      "command": ["npx", "-y", "harmonyos-best-practices-mcp"]
+    },
+    "harmonyos-guides": {
+      "type": "local",
+      "command": ["npx", "-y", "harmonyos-guides-mcp"]
+    },
+    "harmonyos-api-references": {
+      "type": "local",
+      "command": ["npx", "-y", "harmonyos-api-references-mcp"]
+    },
+    "harmonyos-ui-design-guides": {
+      "type": "local",
+      "command": ["npx", "-y", "harmonyos-ui-design-guides-mcp"]
+    }
+  }
+}
+```
+
+搭配各自的 Skill(`harmonyos-best-practices` / `harmonyos-guides` / `harmonyos-api-references` / `harmonyos-ui-design-guides`),AI 可据需求选用:guides 查 API 用法、best-practices 查场景实践与参考代码、api-references 查精确签名、ui-design-guides 查设计规范。
+
+## 快速开始
 
 ### 1. 装 MCP 服务器
 
