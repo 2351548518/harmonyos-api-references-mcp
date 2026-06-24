@@ -1,18 +1,19 @@
 ---
 name: harmonyos-api-references
-description: 查 HarmonyOS API 精确接口定义、参数、返回值、枚举取值、错误码时触发(如 "@ohos.multimedia.audio AudioCapturer 有哪些方法""AVPlayer 的 state 枚举取值""某接口返回的错误码含义""Ability 启动原因 LaunchType 取值")。对应 harmonyos-api-references-mcp 的 search_api_references / get_api_reference / list_api_references_by_topic 工具,检索 4495 篇 API 参考文档。注意:这是查"接口精确定义"(参数/枚举/错误码),若查 API 用法和示例请用 harmonyos-guides,查场景最佳实践和参考代码请用 harmonyos-best-practices。
+description: 查 HarmonyOS API 精确接口定义、参数、返回值、枚举取值、错误码时触发(如 "@ohos.multimedia.audio AudioCapturer 有哪些方法""AVPlayer 的 state 枚举取值""某接口返回的错误码含义""Ability 启动原因 LaunchType 取值")。对应 harmonyos-api-references-mcp 的 search_api_references / get_api_reference / list_api_references_by_topic 工具,检索 4495 篇 API 参考文档。注意:这是查"接口精确定义"(参数/枚举/错误码),若查 API 用法和示例请用 harmonyos-guides,查场景最佳实践和参考代码请用 harmonyos-best-practices,查设计规范用 harmonyos-ui-design-guides。
 ---
 
 # 鸿蒙 API 参考 检索指引
 
 本地有 4495 篇 HarmonyOS API 参考文档(`@ohos.*` 模块的精确接口定义),通过 `harmonyos-api-references` MCP 检索。**在为用户调用某鸿蒙接口前,若需确认其精确签名、参数、返回值、枚举取值或错误码,先检索 API 参考,不要凭记忆编造参数名/取值。**
 
-## 何时用本 Skill(而非 guides / best-practices)
+## 何时用本 Skill(而非 guides / best-practices / ui-design-guides)
 
 - ✅ 用本参考:查**接口精确定义**——方法签名、参数名/类型/必填、返回值、枚举的完整取值、错误码含义。例:"AudioCapturer 有哪些方法""AVPlayer state 枚举""startAbility 的参数""某错误码 16000001 什么意思"。
 - ❌ 用 guides:查 API **怎么用、调用流程、示例代码**(开发指南)。
 - ❌ 用 best-practices:查**场景最佳实践 + 参考代码**(怎么做最好)。
-- 三者配合:guides 讲用法、本参考查精确签名、best-practices 给场景实践。
+- ❌ 用 ui-design-guides:查**设计怎么做**(视觉/交互/控件设计规范)。
+- 四者配合:guides 讲用法、本参考查精确签名、best-practices 给场景实践、ui-design-guides 定设计规范。
 
 ## 检索流程
 
