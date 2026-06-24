@@ -22,7 +22,9 @@
 
 数据规模:4495 篇 API 参考,9 个顶级类——应用框架(1700)、系统(1042)、媒体(650)、应用服务(552)、图形(346)、AI(113)、公共基础能力(48)、标准库(41)、API参考概述(3)。
 
-## 四者并列使用(opencode 示例)
+## 四者并列使用
+
+### OpenCode 示例
 
 ```json
 {
@@ -47,6 +49,34 @@
   }
 }
 ```
+
+### Claude Code 示例
+
+```json
+{
+  "mcpServers": {
+    "harmonyos-best-practices": {
+      "command": "npx",
+      "args": ["-y", "harmonyos-best-practices-mcp"],
+      "env": { "BP_CODE_DIR": "/abs/path/to/best_practices_code" }
+    },
+    "harmonyos-guides": {
+      "command": "npx",
+      "args": ["-y", "harmonyos-guides-mcp"]
+    },
+    "harmonyos-api-references": {
+      "command": "npx",
+      "args": ["-y", "harmonyos-api-references-mcp"]
+    },
+    "harmonyos-ui-design-guides": {
+      "command": "npx",
+      "args": ["-y", "harmonyos-ui-design-guides-mcp"]
+    }
+  }
+}
+```
+
+### BP_CODE_DIR 设置
 
 > **`BP_CODE_DIR`(仅 best-practices 可选)**:指向本地 `best_practices_code/` 目录(从 GitHub Release 下载 `harmonyos-best-practices-code.tar.gz` 解压得到)。配置后 `get_code_example` 会返回本地仓库路径与入口 `.ets` 文件,AI 可直接读取真实官方示例代码;**不配则只返回 gitcode 远程 URL**。Windows 路径用正斜杠更稳(如 `C:/path/to/best_practices_code`)。其余三个 MCP 是纯文档,无需此变量。
 
