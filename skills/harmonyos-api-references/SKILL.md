@@ -23,6 +23,24 @@ description: 查 HarmonyOS API 精确接口定义、参数、返回值、枚举�
 
 3. **依据定义编码**:接口名、参数、取值以参考正文为准,不凭记忆编造。枚举值、错误码必须查证后使用。
 
+## 检索关键词指南(选对词,命中更准)
+
+检索用 BM25 + CJK 权重 + 同义词扩展。关键词选择技巧:
+
+- **`@ohos.*` 模块名最准**:API 参考按模块组织,用完整模块名命中目标接口文档。例:`@ohos.net.http`、`@ohos.data.relationalStore`、`@ohos.file.fs`、`@ohos.multimedia.camera`。
+- **模块名 + 接口名**:缩小到具体接口。例:`@ohos.multimedia.media AVPlayer`、`@ohos.multimedia.audio AudioCapturer`、`@ohos.app.ability UIAbility`。
+- **C API 用 capi- 前缀**:C/C++ 接口文档 docId 多为 `capi-xxx`。例:`AVRecorder 录制接口` → `capi-avrecorder`。
+- **同义词已内置扩展**:弹窗↔dialog、列表↔list、按钮↔button 等自动 OR 扩展,用任一写法都能命中。
+- **查不到时**:先 `list_api_references_by_topic` 看大类找 Kit,再下钻;或换 `@ohos.` 模块名重试。
+
+## 大类清单(先定位,再下钻)
+
+4495 篇 API 参考,9 个顶级类(括号为文档数):
+
+API参考概述(3)、应用框架(1700)、系统(1042)、媒体(650)、应用服务(552)、图形(346)、AI(113)、公共基础能力(48)、标准库(41)。
+
+用 `list_api_references_by_topic({topic:"<大类>"})` 下钻,支持多级路径前缀(如 `媒体 / Media Kit`,括号容错)。
+
 ## 辅助
 
 - 不确定某 API 归哪个 Kit 时,用 `list_api_references_by_topic()` 看顶级类(API参考概述/应用框架/系统/媒体/应用服务/图形/AI/公共基础能力/标准库),再 `list_api_references_by_topic({topic:"媒体"})` 下钻,支持传完整路径前缀(如 `媒体 / Audio Kit`)进一步缩小。
