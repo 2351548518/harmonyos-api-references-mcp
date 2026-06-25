@@ -1,6 +1,6 @@
 {
   "name": "harmonyos-api-references-mcp",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "MCP server exposing HarmonyOS API references (4495 docs) for precise API signature/param/enum lookup during development.",
   "type": "module",
   "main": "dist/index.js",
