@@ -29,20 +29,20 @@
   "mcp": {
     "harmonyos-best-practices": {
       "type": "local",
-      "command": ["npx", "-y", "harmonyos-best-practices-mcp"],
+      "command": ["npx", "-y", "harmonyos-best-practices-mcp@latest"],
       "environment": { "BP_CODE_DIR": "/abs/path/to/best_practices_code" }
     },
     "harmonyos-guides": {
       "type": "local",
-      "command": ["npx", "-y", "harmonyos-guides-mcp"]
+      "command": ["npx", "-y", "harmonyos-guides-mcp@latest"]
     },
     "harmonyos-api-references": {
       "type": "local",
-      "command": ["npx", "-y", "harmonyos-api-references-mcp"]
+      "command": ["npx", "-y", "harmonyos-api-references-mcp@latest"]
     },
     "harmonyos-ui-design-guides": {
       "type": "local",
-      "command": ["npx", "-y", "harmonyos-ui-design-guides-mcp"]
+      "command": ["npx", "-y", "harmonyos-ui-design-guides-mcp@latest"]
     }
   }
 }
@@ -55,20 +55,20 @@
   "mcpServers": {
     "harmonyos-best-practices": {
       "command": "npx",
-      "args": ["-y", "harmonyos-best-practices-mcp"],
+      "args": ["-y", "harmonyos-best-practices-mcp@latest"],
       "env": { "BP_CODE_DIR": "/abs/path/to/best_practices_code" }
     },
     "harmonyos-guides": {
       "command": "npx",
-      "args": ["-y", "harmonyos-guides-mcp"]
+      "args": ["-y", "harmonyos-guides-mcp@latest"]
     },
     "harmonyos-api-references": {
       "command": "npx",
-      "args": ["-y", "harmonyos-api-references-mcp"]
+      "args": ["-y", "harmonyos-api-references-mcp@latest"]
     },
     "harmonyos-ui-design-guides": {
       "command": "npx",
-      "args": ["-y", "harmonyos-ui-design-guides-mcp"]
+      "args": ["-y", "harmonyos-ui-design-guides-mcp@latest"]
     }
   }
 }
@@ -91,7 +91,7 @@
   "mcpServers": {
     "harmonyos-api-references": {
       "command": "npx",
-      "args": ["-y", "harmonyos-api-references-mcp"]
+      "args": ["-y", "harmonyos-api-references-mcp@latest"]
     }
   }
 }
@@ -107,9 +107,11 @@
 
 | 工具 | 作用 |
 |------|------|
-| `search_api_references({query, limit?})` | 全文检索 API 参考文档(中文友好),返回相关度排序的文档列表(含标题、分类路径) |
+| `search_api_references({query, limit?})` | 全文检索 API 参考文档(BM25 + CJK 权重 + 同义词扩展,中文友好),返回相关度排序的文档列表(含标题、分类路径) |
 | `get_api_reference({name})` | 读取指定 API 参考(docId)的完整 Markdown 正文 |
 | `list_api_references_by_topic({topic?})` | 按分类路径浏览;支持多级下钻(如 `媒体` → `媒体 / Audio Kit`) |
+
+**检索算法**:BM25 排序(TF 饱和 + 文档长度归一化 + IDF)→ CJK 单字×0.3 / 双字 bigram×0.5 降权(抑制跨词边界噪声)→ 域内同义词软 OR 扩展(`data/synonyms.json` 驱动,如 列表↔list、弹窗↔dialog)。同义词词典数据驱动,编辑 JSON 即可扩展,无需改代码。
 
 数据规模:4495 篇 API 参考,9 个顶级类——应用框架(1700)、系统(1042)、媒体(650)、应用服务(552)、图形(346)、AI(113)、公共基础能力(48)、标准库(41)、API参考概述(3)。
 
@@ -182,7 +184,7 @@ node gen_index.mjs
 
 - **为什么独立 MCP**:API 参考与指南(gudes)虽都是文档,但用途不同——参考是"接口字典"(精确签名/枚举/错误码),指南是"用法教程"。独立服务让 AI 能据需求选对检索源,各自的 Skill description 已刻意区分(本服务查"精确定义"、guides 查"用法"、best-practices 查"实践")。
 - **多级分类路径**:API 参考的路径深(`应用框架 / Ability Kit / ArkTS API / Stage模型 / @ohos.app.ability.Ability`),`list_api_references_by_topic` 支持前缀下钻。
-- **检索打分**:`5×title + 3×path + 3×headings + 1×正文(前200行)`,标题全文预提取,深节标题也能高权重命中。
+- **检索打分**:BM25(TF 饱和 + 文档长度归一化 + IDF),CJK 单字×0.3 / 双字×0.5 降权去跨词噪声,同义词软 OR 扩展(列表↔list 等)。标题全文预提取,深节标题也能高权重命中。
 - **文档随包**:4495 篇压缩后随 npm 包,装包即用、零配置。纯文档无代码,无需 Release 附件。
 
 ## 许可
